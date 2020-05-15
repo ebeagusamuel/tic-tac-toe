@@ -7,16 +7,15 @@ def get_player1_symbol(symbol = nil)
   puts 'Player 1, please choose your symbol to use in the game...'
   player_one_symbol = gets.chomp
   puts "Player 1 will use #{player_one_symbol}"
+  return player_one_symbol
 end
 
 def get_player2_symbol(player_one_symbol)
   puts 'Player 2, please choose your symbol to use in the game...'
   player_two_symbol = gets.chomp
   if player_one_symbol == player_two_symbol
-    puts 'Symbol chosen already, please chose another symbol'
-    player_two_symbol = gets.chomp 
-    
-    puts "Player 2 will use #{player_two_symbol}" if !player_one_symbol 
+    puts 'Symbol chosen already'
+    get_player2_symbol(player_one_symbol)
   else
     puts "Player 2 will use #{player_two_symbol}"
   end
@@ -43,4 +42,6 @@ end
 
 # puts 'Game ends'
 welcome
-get_player_symbol
+# get_player1_symbol
+player1_symbol = get_player1_symbol
+get_player2_symbol(player1_symbol)
