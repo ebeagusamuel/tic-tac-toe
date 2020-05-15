@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
-puts 'Welcome to the Tic Tac Toe Game'
+def Welcome
+  puts 'Welcome to the Tic Tac Toe Game'
+end
+
 puts 'Player 1, please choose your symbol to use in the game...'
 PLAYER_ONE_SYMBOL = gets.chomp
 puts "Player 1 will use #{PLAYER_ONE_SYMBOL}"
@@ -19,3 +22,13 @@ def display_board(board_array)
 end
 
 display_board(board_array)
+
+puts 'Game begins'
+puts 'Player 1, your turn'
+puts 'Player 2, your turn'
+
+puts 'Player 1 wins'
+puts 'Player 2 wins'
+
+puts 'Game ends'
+
