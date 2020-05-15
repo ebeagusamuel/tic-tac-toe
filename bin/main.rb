@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-def Welcome
+def welcome
   puts 'Welcome to the Tic Tac Toe Game'
 end
 
@@ -31,4 +31,3 @@ puts 'Player 1 wins'
 puts 'Player 2 wins'
 
 puts 'Game ends'
-
