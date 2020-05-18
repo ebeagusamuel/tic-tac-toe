@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# rubocop disable: Lint/uselessAssignment
 user_symbols = %w[X O]
 board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -116,4 +115,4 @@ player2_name = get_player2_name(user_symbols)
 start_game
 player = player_turn(board_array, player1_name, player2_name, user_symbols)
 play_game(board_array, player1_name, player2_name, player, user_symbols)
-# rubocop enable: Lint/uselessAssignment
+
