@@ -56,10 +56,6 @@ def player_move
   end
 end
 
-# def current_move(move, player_name)
-#   current_player = {name: "#{player_name}", sign: "#{user_symbols[0]}" }
-# end
-
 def validate_move?(board_array, player_move)
   board_array.include?(player_move)
 end
@@ -79,7 +75,5 @@ player2_name = get_player2_name(user_symbols)
 display_board(board_array)
 player = player_turn(board_array, player1_name, player2_name, user_symbols)
 move = player_move
-# current_move(move, player_name)
-# validate_move?(board_array, move)
 update_board(board_array, move, player)
   
