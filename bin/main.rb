@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# rubocop disable: Lint/uselessAssignment
 user_symbols = %w[X O]
 board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -10,22 +11,22 @@ def get_player1_name(user_symbols)
   puts 'Player 1, what is your name...'
   player_one_name = gets.chomp
   puts "#{player_one_name} will use #{user_symbols[0]}"
-  return player_one_name
+  player_one_name
 end
 
 def get_player2_name(user_symbols)
   puts 'Player 2, what is your name...'
   player_two_name = gets.chomp
   puts "#{player_two_name} will use #{user_symbols[1]}"
-  return player_two_name
+  player_two_name
 end
 
 def start_game
-  puts "Let the game begin"
+  puts 'Let the game begin'
 end
 
 def display_board(board_array)
-  puts "Current board: "
+  puts 'Current board: '
   puts " #{board_array[0]} | #{board_array[1]} | #{board_array[2]} "
   puts '-----------'
   puts " #{board_array[3]} | #{board_array[4]} | #{board_array[5]} "
@@ -35,20 +36,20 @@ end
 
 def player_turn(board_array, player_one_name, player_two_name, user_symbols)
   item_count = board_array.count { |item| item.is_a? Integer }
-  if item_count % 2 == 0
+  if item_count.even?
     puts "#{player_two_name}, it is your turn..."
-    player_two = {"name" => "#{player_two_name}", "sign" => "#{user_symbols[1]}" }
+    { 'name' => player_two_name.to_s, 'sign' => (user_symbols[1]).to_s }
   else
     puts "#{player_one_name}, it is your turn..."
-    player_one = {"name" => "#{player_one_name}", "sign" => "#{user_symbols[0]}" }
+    { 'name' => player_one_name.to_s, 'sign' => (user_symbols[0]).to_s }
   end
 end
 
 def player_move
-  puts "Choose a number between 1 and 9..."
+  puts 'Choose a number between 1 and 9...'
   move = gets.chomp.to_i
-  if move == 0 
-    puts "You chose an invalid number, please choose again ..." 
+  if move.zero?
+    puts 'You chose an invalid number, please choose again ...'
     player_move
   else
     move
@@ -61,10 +62,10 @@ end
 
 def update_board(board_array, player_move, player)
   if validate_move?(board_array, player_move)
-    board_array[player_move-1] = player["sign"]
+    board_array[player_move - 1] = player['sign']
     display_board(board_array)
   else
-    puts "Invalid move. Please try again..."
+    puts 'Invalid move. Please try again...'
     player_move
   end
 end
@@ -79,16 +80,16 @@ def won?(board, player)
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-]
+  ]
   winning_combinations.each do |arr|
-    return true if board[arr[0]] == player["sign"] && board[arr[1]] == player["sign"] && board[arr[2]] == player["sign"]
+    return true if board[arr[0]] == player['sign'] && board[arr[1]] == player['sign'] && board[arr[2]] == player['sign']
   end
   false
 end
 
 def draw?(board_array)
   count = board_array.count { |item| item.is_a? Integer }
-  count == 0 && !won?(board, player) ? true : false
+  count.zero? && !won?(board, player) ? true : false
 end
 
 def play_game(board_array, player1_name, player2_name, player, user_symbols)
@@ -103,14 +104,9 @@ end
 
 def game_over(board, player)
   if won?(board, player)
-    puts "#{player["name"]} has won the game!"
+    puts "#{player['name']} has won the game!"
   elsif draw?(board, player)
-    puts "The game is a draw!"
-  end
-  puts "Do you want to play again?(Y/N)"
-  answer = gets.chomp.downcase
-  if answer == "y"
-    board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    puts 'The game is a draw!'
   end
 end
 
@@ -120,5 +116,4 @@ player2_name = get_player2_name(user_symbols)
 start_game
 player = player_turn(board_array, player1_name, player2_name, user_symbols)
 play_game(board_array, player1_name, player2_name, player, user_symbols)
-
-  
+# rubocop enable: Lint/uselessAssignment
