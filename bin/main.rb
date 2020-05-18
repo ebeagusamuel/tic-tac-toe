@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 user_symbols = %w[X O]
 board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -65,15 +64,61 @@ def update_board(board_array, player_move, player)
     board_array[player_move-1] = player["sign"]
     display_board(board_array)
   else
+    puts "Invalid move. Please try again..."
+    player_move
   end
+end
 
+def won?(board, player)
+  winning_combinations = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
+  winning_combinations.each do |arr|
+    return true if board[arr[0]] == player["sign"] && board[arr[1]] == player["sign"] && board[arr[2]] == player["sign"]
+  end
+  false
+end
+
+def draw?(board_array)
+  count = board_array.count { |item| item.is_a? Integer }
+  count == 0 && !won?(board, player) ? true : false
+end
+
+def play_game(board_array, player1_name, player2_name, player, user_symbols)
+  loop do
+    display_board(board_array)
+    player = player_turn(board_array, player1_name, player2_name, user_symbols)
+    move = player_move
+    update_board(board_array, move, player)
+    break if won?(board_array, player) || draw?(board_array)
+  end
+end
+
+def game_over(board, player)
+  if won?(board, player)
+    puts "#{player["name"]} has won the game!"
+  elsif draw?(board, player)
+    puts "The game is a draw!"
+  end
+  puts "Do you want to play again?(Y/N)"
+  answer = gets.chomp.downcase
+  if answer == "y"
+    board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
 end
 
 welcome
 player1_name = get_player1_name(user_symbols)
 player2_name = get_player2_name(user_symbols)
-display_board(board_array)
+start_game
 player = player_turn(board_array, player1_name, player2_name, user_symbols)
-move = player_move
-update_board(board_array, move, player)
+play_game(board_array, player1_name, player2_name, player, user_symbols)
+
   
