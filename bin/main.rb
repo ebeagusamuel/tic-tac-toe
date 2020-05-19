@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 user_symbols = %w[X O]
-board_array = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def welcome
   puts 'Welcome to the Tic Tac Toe Game'
@@ -24,17 +24,17 @@ def start_game
   puts 'Let the game begin'
 end
 
-def display_board(board_array)
+def display_board(board)
   puts 'Current board: '
-  puts " #{board_array[0]} | #{board_array[1]} | #{board_array[2]} "
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
   puts '-----------'
-  puts " #{board_array[3]} | #{board_array[4]} | #{board_array[5]} "
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
   puts '-----------'
-  puts " #{board_array[6]} | #{board_array[7]} | #{board_array[8]} "
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def player_turn(board_array, player_one_name, player_two_name, user_symbols)
-  item_count = board_array.count { |item| item.is_a? Integer }
+def player_turn(board, player_one_name, player_two_name, user_symbols)
+  item_count = board.count { |item| item.is_a? Integer }
   if item_count.even?
     puts "#{player_two_name}, it is your turn..."
     { 'name' => player_two_name.to_s, 'sign' => (user_symbols[1]).to_s }
@@ -55,14 +55,14 @@ def player_move
   end
 end
 
-def validate_move?(board_array, player_move)
-  board_array.include?(player_move)
+def validate_move?(board, player_move)
+  board.include?(player_move)
 end
 
-def update_board(board_array, player_move, player)
-  if validate_move?(board_array, player_move)
-    board_array[player_move - 1] = player['sign']
-    display_board(board_array)
+def update_board(board, player_move, player)
+  if validate_move?(board, player_move)
+    board[player_move - 1] = player['sign']
+    display_board(board)
   else
     puts 'Invalid move. Please try again...'
     player_move
@@ -86,33 +86,37 @@ def won?(board, player)
   false
 end
 
-def draw?(board_array)
-  count = board_array.count { |item| item.is_a? Integer }
+def draw?(board, player)
+  count = board.count { |item| item.is_a? Integer }
   count.zero? && !won?(board, player) ? true : false
 end
 
-def play_game(board_array, player1_name, player2_name, player, user_symbols)
+def play_game(board, player1_name, player2_name, player, user_symbols)
   loop do
-    display_board(board_array)
-    player = player_turn(board_array, player1_name, player2_name, user_symbols)
+    player = player_turn(board, player1_name, player2_name, user_symbols)
     move = player_move
-    update_board(board_array, move, player)
-    break if won?(board_array, player) || draw?(board_array)
+    update_board(board, move, player)
+    break if won?(board, player) || draw?(board, player)
   end
+  game_over(board, player1_name, player2_name, player, user_symbols)
 end
 
-def game_over(board, player)
-  if won?(board, player)
-    puts "#{player['name']} has won the game!"
-  elsif draw?(board, player)
-    puts 'The game is a draw!'
-  end
+def game_over(board, player1_name, player2_name, player, user_symbols)
+  puts "#{player['name']} has won the game!" if won?(board, player)
+  puts 'The game is a draw!' if draw?(board, player)
+  puts "If you want to play again press 'Y'"
+  answer = gets.chomp.downcase
+  return puts 'Ending game now!' unless answer == 'y'
+
+  board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  display_board(board)
+  play_game(board, player1_name, player2_name, player, user_symbols)
 end
 
 welcome
 player1_name = get_player1_name(user_symbols)
 player2_name = get_player2_name(user_symbols)
 start_game
-player = player_turn(board_array, player1_name, player2_name, user_symbols)
-play_game(board_array, player1_name, player2_name, player, user_symbols)
-
+player = player_turn(board, player1_name, player2_name, user_symbols)
+display_board(board)
+play_game(board, player1_name, player2_name, player, user_symbols)
