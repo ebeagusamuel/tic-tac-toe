@@ -7,7 +7,9 @@ require './lib/validators.rb'
 user_symbols = %w[X O]
 
 def welcome
-  puts 'Welcome to the Tic Tac Toe Game'
+  puts '-----------------------------------'
+  puts '| Welcome to the Tic Tac Toe Game |'
+  puts '-----------------------------------'
 end
 
 def get_player1_name(user_symbols)
@@ -70,7 +72,7 @@ def play_game(curr_board, player1, player2, player)
 end
 
 def game_over(board, player1, player2, player)
-  puts "#{player.name} has won the game!" if Validators.won?(board, player)
+  puts "*****#{player.name} has won the game!*****" if Validators.won?(board, player)
   puts 'The game is a draw!' if Validators.draw?(board, player)
   puts "If you want to play again press 'Y'"
   answer = gets.chomp.downcase
