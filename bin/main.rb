@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
-require './lib/player.rb'
-require './lib/board.rb'
-require './lib/validators.rb'
+require_relative '../lib/player.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/validators.rb'
+require_relative '../lib/game.rb'
 
 user_symbols = %w[X O]
 counter = 0
@@ -22,7 +23,7 @@ def get_players(counter, user_symbols)
 
   puts "Player #{counter+1}, what is your name..."
   player_two_name = gets.chomp
-  player_two = Player.new(player_one_name, user_symbols[1])
+  player_two = Player.new(player_two_name, user_symbols[1])
   puts "#{player_two.name} will use #{player_two.symbol}"
 
   {"player1" => player_one, "player2" => player_two}
@@ -34,8 +35,8 @@ end
 
 def play_game(curr_board, player1, player2, player)
   loop do
-    player = Player.player_turn(player1, player2, curr_board)
-    move = Player.player_move
+    player = Game.player_turn(player1, player2, curr_board)
+    move = Game.player_move
     if Validators.validate_move?(curr_board.board, move)
       curr_board.update_board(move, player)
       curr_board.display_board
@@ -55,7 +56,7 @@ def game_over(board, player1, player2, player)
     player.num_of_wins += 1
   end
   puts 'The game is a draw!' if Validators.draw?(board, player)
-  puts "If you want to play again press 'Y'"
+  puts "If you want to play again press 'Y' or press any other key to end the game..."
   answer = gets.chomp.downcase
   if answer != 'y'
     puts 'Ending game now!'
@@ -74,11 +75,8 @@ welcome
 players = get_players(counter, user_symbols)
 player1 = players["player1"]
 player2 = players["player2"]
-
-
-
 start_game
 curr_board = Board.new
-player = Player.player_turn(player1, player2, curr_board)
+player = Game.player_turn(player1, player2, curr_board)
 curr_board.display_board
 play_game(curr_board, player1, player2, player)
