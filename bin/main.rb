@@ -5,6 +5,7 @@ require './lib/board.rb'
 require './lib/validators.rb'
 
 user_symbols = %w[X O]
+counter = 0
 
 def welcome
   puts '-----------------------------------'
@@ -12,20 +13,19 @@ def welcome
   puts '-----------------------------------'
 end
 
-def get_player1_name(user_symbols)
-  puts 'Player 1, what is your name...'
+def get_players(counter, user_symbols)
+  puts "Player #{counter+1}, what is your name..."
   player_one_name = gets.chomp
   player_one = Player.new(player_one_name, user_symbols[0])
   puts "#{player_one.name} will use #{player_one.symbol}"
-  player_one
-end
+  counter += 1
 
-def get_player2_name(user_symbols)
-  puts 'Player 2, what is your name...'
+  puts "Player #{counter+1}, what is your name..."
   player_two_name = gets.chomp
-  player_two = Player.new(player_two_name, user_symbols[1])
+  player_two = Player.new(player_one_name, user_symbols[1])
   puts "#{player_two.name} will use #{player_two.symbol}"
-  player_two
+
+  {"player1" => player_one, "player2" => player_two}
 end
 
 def start_game
@@ -70,8 +70,13 @@ def game_over(board, player1, player2, player)
 end
 
 welcome
-player1 = get_player1_name(user_symbols)
-player2 = get_player2_name(user_symbols)
+
+players = get_players(counter, user_symbols)
+player1 = players["player1"]
+player2 = players["player2"]
+
+
+
 start_game
 curr_board = Board.new
 player = Player.player_turn(player1, player2, curr_board)
