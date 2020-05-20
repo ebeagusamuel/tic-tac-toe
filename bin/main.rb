@@ -15,18 +15,18 @@ def welcome
 end
 
 def get_players(counter, user_symbols)
-  puts "Player #{counter+1}, what is your name..."
+  puts "Player #{counter + 1}, what is your name..."
   player_one_name = gets.chomp
   player_one = Player.new(player_one_name, user_symbols[0])
   puts "#{player_one.name} will use #{player_one.symbol}"
   counter += 1
 
-  puts "Player #{counter+1}, what is your name..."
+  puts "Player #{counter + 1}, what is your name..."
   player_two_name = gets.chomp
   player_two = Player.new(player_two_name, user_symbols[1])
   puts "#{player_two.name} will use #{player_two.symbol}"
 
-  {"player1" => player_one, "player2" => player_two}
+  { 'player1' => player_one, 'player2' => player_two }
 end
 
 def start_game
@@ -73,8 +73,8 @@ end
 welcome
 
 players = get_players(counter, user_symbols)
-player1 = players["player1"]
-player2 = players["player2"]
+player1 = players['player1']
+player2 = players['player2']
 start_game
 curr_board = Board.new
 player = Game.player_turn(player1, player2, curr_board)
