@@ -1,5 +1,5 @@
 class Validators
-  @@winning_combinations = [
+  @winning_combinations = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -16,7 +16,7 @@ class Validators
   end
 
   def self.won?(board, player)
-    @@winning_combinations.each do |arr|
+    @winning_combinations.each do |arr|
       return true if board[arr[0]] == player.symbol && board[arr[1]] == player.symbol && board[arr[2]] == player.symbol
     end
     false

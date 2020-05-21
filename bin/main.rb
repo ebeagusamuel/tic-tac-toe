@@ -13,12 +13,12 @@ def welcome
 end
 
 def get_players(user_symbols)
-  puts "Player 1, what is your name..."
+  puts 'Player 1, what is your name...'
   player_one_name = gets.chomp
   player_one = Player.new(player_one_name, user_symbols[0])
   puts "#{player_one.name} will use #{player_one.symbol}"
 
-  puts "Player 2, what is your name..."
+  puts 'Player 2, what is your name...'
   player_two_name = gets.chomp
   player_two = Player.new(player_two_name, user_symbols[1])
   puts "#{player_two.name} will use #{player_two.symbol}"
