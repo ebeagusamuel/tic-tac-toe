@@ -8,7 +8,6 @@ class Player
     @num_of_wins = 0
   end
 
-
   def self.player_turn(player_one, player_two, curr_board)
     count = curr_board.integer_count
     if count.even?

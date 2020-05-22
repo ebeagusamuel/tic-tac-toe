@@ -87,7 +87,7 @@ end
 
 welcome
 player1 = get_player(counter, user_symbols)
-counter +=1
+counter += 1
 player2 = get_player(counter, user_symbols)
 start_game
 curr_board = Board.new
