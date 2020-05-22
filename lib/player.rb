@@ -7,4 +7,14 @@ class Player
     @symbol = symbol
     @num_of_wins = 0
   end
+
+
+  def self.player_turn(player_one, player_two, curr_board)
+    count = curr_board.integer_count
+    if count.even?
+      player_two
+    else
+      player_one
+    end
+  end
 end
