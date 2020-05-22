@@ -6,18 +6,21 @@ describe Validators do
   curr_board = Board.new
   player = Player.new("sam", "X")
   move = 3
+
   describe '.validate_move?' do
     it 'should return true if move is available on the current board' do
       actual = Validators.validate_move?(curr_board.board, move)
       expect(actual).to be true
     end
 
-    it 'should return false if move is not available on the current board' do
+     it 'should return false if move is not available on the current board' do
       curr_board.update_board(move, player)
       actual = Validators.validate_move?(curr_board.board, move)
       expect(actual).to be false
     end
+  end
 
+  describe '.won?' do
     it 'should return false if no winning combination is on the current board' do
       curr_board.update_board(move, player)
       actual = Validators.won?(curr_board.board, player)
@@ -44,6 +47,20 @@ describe Validators do
       curr_board.update_board(8, player)
       actual = Validators.won?(curr_board.board, player)
       expect(actual).to be false
+    end
+  end
+
+  describe '.draw?' do
+    it 'should return false if all tiles are not full and no winning combination found' do
+      curr_board.update_board(move, player)
+      actual = Validators.draw?(curr_board.board, player)
+      expect(actual).to be false
+    end
+
+    it 'should return true if all tiles are full and no winning combination found' do
+      curr_board.board = %w[X X O O O X X O X]
+      actual = Validators.draw?(curr_board.board, player)
+      expect(actual).to be true
     end
   end
 end
