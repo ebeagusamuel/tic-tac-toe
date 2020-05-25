@@ -3,7 +3,7 @@ require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
 describe Validators do
-  let(:curr_board) { Board.new }
+  curr_board = Board.new
   let(:player) { Player.new('sam', 'X') }
   let(:move) { 3 }
 
