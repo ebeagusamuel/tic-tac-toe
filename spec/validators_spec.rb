@@ -3,9 +3,9 @@ require_relative '../lib/board.rb'
 require_relative '../lib/player.rb'
 
 describe Validators do
-  curr_board = Board.new
-  player = Player.new('sam', 'X')
-  move = 3
+  let(:curr_board) { Board.new }
+  let(:player) { Player.new('sam', 'X') }
+  let(:move) { 3 }
 
   describe '.validate_move?' do
     it 'should return true if move is available on the current board' do
