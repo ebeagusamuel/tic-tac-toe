@@ -2,10 +2,16 @@ require_relative '../lib/board.rb'
 
 describe Board do
   describe '#integer_count' do
-    it 'returns true if return value is an integer or nil' do
-      board = Board.new
-      count = board.integer_count
-      expect(count).to be_a Integer || Nil
+    let(:curr_board) {Board.new}
+    it 'returns true when there are integer values in the board' do
+      count = curr_board.integer_count
+      expect(count).to be > 0
+    end
+
+    it 'returns false when there are no integer values in the board' do
+      curr_board.board = %w[ X O X O X O O O X ]
+      count = curr_board.integer_count
+      expect(count).to eql(0)
     end
   end
 
