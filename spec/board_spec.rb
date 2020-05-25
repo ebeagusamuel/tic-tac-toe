@@ -1,4 +1,5 @@
 require_relative '../lib/board.rb'
+require_relative '../lib/player.rb'
 
 describe Board do
   let(:curr_board) { Board.new }
