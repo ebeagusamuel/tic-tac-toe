@@ -26,9 +26,9 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               $URL
           )
-          echo '::set-output name=PR_FILES::$FILES'
+          echo $FILES
 
-      - name: Run check
+      # - name: Run check
         # run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ steps.pull_request_files.outputs.PR_FILES }}'"
-        run: echo ${{ steps.pull_request_files.outputs.PR_FILES }}
+        # run: echo ${{ steps.pull_request_files.outputs.PR_FILES }}
 
