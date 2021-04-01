@@ -26,7 +26,7 @@ jobs:
               $URL
           )
           echo $FILES
-          echo 'pr_files=$(echo $FILES)' >> $GITHUB_ENV
+          echo "pr_files=$(echo $FILES)" >> $GITHUB_ENV
 
       - name: Run check
         # run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ steps.pull_request_files.outputs.PR_FILES }}'"
