@@ -1,9 +1,5 @@
 class TestClass
-  def initialize(arg)
-    @arg = arg
-  end
-
-  def run
-    puts @arg
+  def self.run(arg)
+    puts arg
   end
 end
