@@ -1,5 +1,3 @@
-require_relative 'files_to_ignore'
-
 class TestClass
   # FILES = Dir.glob('**/**', File::FNM_DOTMATCH)
 
