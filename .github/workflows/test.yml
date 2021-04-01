@@ -27,9 +27,9 @@ jobs:
               $URL
           )
           echo $FILES
-          echo 'PR_FILES=$( echo $FILES)' >> $GITHUB_ENV
+          echo 'action_state=yellow' >> $GITHUB_ENV
 
       - name: Run check
         # run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ steps.pull_request_files.outputs.PR_FILES }}'"
-        run: echo $PR_FILES
+        run: echo "${{ env.action_state }}"
 
