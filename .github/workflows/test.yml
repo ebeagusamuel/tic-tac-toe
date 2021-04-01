@@ -5,7 +5,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      pr_num: ${{ github.event.number }}
+      PR_NUM: ${{ github.event.number }}
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -13,6 +13,6 @@ jobs:
           ruby-version: 2.6
       - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${GITHUB_REPOSITORY}'"
       - run: |
-          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${ pr_num }/files"
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/$PR_NUM/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES
