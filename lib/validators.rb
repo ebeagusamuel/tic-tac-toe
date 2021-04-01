@@ -26,4 +26,6 @@ class Validators
     count = board.count { |item| item.is_a? Integer }
     count.zero? && !won?(board, player) ? true : false
   end
+
+  #comment
 end

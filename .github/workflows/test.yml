@@ -10,3 +10,7 @@ jobs:
         with:
           ruby-version: 2.6
       - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${GITHUB_REPOSITORY}'"
+      run: |
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          echo $FILES
