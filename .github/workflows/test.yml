@@ -9,7 +9,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-      - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${GITHUB_REPOSITORY}'"
       - run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(
@@ -17,4 +16,4 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               $URL
           )
-          echo $FILES
+         ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$FILES'"
