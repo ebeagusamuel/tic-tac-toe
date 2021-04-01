@@ -1,6 +1,8 @@
 name: Testing Github Actions
 on:
   push
+env:
+  PR_NUMBER: github.event.pull_request.number
 jobs: 
   test:
     runs-on: ubuntu-latest
@@ -9,4 +11,4 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-      - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '---I was called---'"
+      - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${PR_NUMBER}'"
