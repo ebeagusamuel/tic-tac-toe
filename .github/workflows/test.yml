@@ -29,6 +29,6 @@ jobs:
           echo "pr_files=$(echo $FILES)" >> $GITHUB_ENV
 
       - name: Run check
-        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ env.pr_files }}'"
-        # run: echo ${{ env.pr_files }}
+        # run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ env.pr_files }}'"
+        run: echo ${ env.pr_files }
 
