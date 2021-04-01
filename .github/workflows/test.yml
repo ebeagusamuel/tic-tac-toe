@@ -18,7 +18,7 @@ jobs:
           ruby-version: 2.6
       
       - name: Fetch List of pull request files
-        # id: pull_request_files
+        id: pull_request_files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(
@@ -26,9 +26,9 @@ jobs:
               -H "Accept: application/vnd.github.v3+json" \
               $URL
           )
-          echo "pr_files=$FILES" >> $GITHUB_ENV
+          echo '::set-output name=PR_FILES::$FILES'
 
       - name: Run check
         # run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ steps.pull_request_files.outputs.PR_FILES }}'"
-        run: echo ${{ env.pr_files }}
+        run: echo ${{ steps.pull_request_files.outputs.PR_FILES }}
 
