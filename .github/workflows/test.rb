@@ -4,6 +4,6 @@ class TestClass
   def self.run(arg)
     puts arg
     puts FILES.size
-    puts File
+    puts FILES
   end
 end
