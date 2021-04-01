@@ -1,19 +1,33 @@
 name: Testing Github Actions
+
 on:
   push
-jobs: 
-  test:
+
+jobs:
+  Test GA:
+    name: Test GA
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby  
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-      - run: |
+      
+      - name: Fetch List of pull request files
+        id: pull_request_files
+        run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(
             curl \
               -H "Accept: application/vnd.github.v3+json" \
               $URL
           )
-         ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$FILES'"
+          echo "::set-output name=PR_FILES::$FILES"
+
+      - name: RUn check
+        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ steps.pull_request_files.outputs.PR_FILES }}'"
+
