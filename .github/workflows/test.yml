@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  Test GA:
+  test_ga:
     name: Test GA
     runs-on: ubuntu-latest
 
