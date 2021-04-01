@@ -1,10 +1,9 @@
-# class TestClass
-#   def initialize(arg)
-#     @arg = arg
-#   end
+class TestClass
+  def initialize(arg)
+    @arg = arg
+  end
 
-#   def run
-#     puts @arg
-#   end
-# end
-puts "Hello World"
+  def run
+    puts @arg
+  end
+end

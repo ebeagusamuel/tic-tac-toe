@@ -9,4 +9,4 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-      - run: ruby ./.github/workflows/test.rb
+      - run: ruby -r "./.github/workflows/test.rb" -e "TestClass.new '---I was called---'.run"
