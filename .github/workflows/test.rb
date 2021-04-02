@@ -1,5 +1,5 @@
 class TestClass
-  def run(arg)
-    puts arg
+  def self.run(arg)
+   puts a
   end
 end
