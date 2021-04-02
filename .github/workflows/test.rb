@@ -1,9 +1,5 @@
 class TestClass
-  # FILES = Dir.glob('**/**', File::FNM_DOTMATCH)
-
-  def self.run(arg)
-    # a = arg.select{|entry| entry[:status] != 'removed'}.map{|e| e[:filename]}
-
-    puts arg.class
+  def run(arg)
+    puts arg
   end
 end

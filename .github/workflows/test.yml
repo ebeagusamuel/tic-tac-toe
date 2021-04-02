@@ -22,7 +22,7 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
           echo $FILES
-          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{FILES}}'"
+          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ github.event.number }}'"
 
       # - name: Run check
       #   run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ fromJson(env.pr_files) }}'"
