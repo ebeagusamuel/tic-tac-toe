@@ -23,7 +23,7 @@ jobs:
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
           ANS=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'Hello'")
           echo $ANS
-          echo 'ans=$ANS' >> $GITHUB_ENV
+          echo 'ans=Hello' >> $GITHUB_ENV
 
       - name: Run check
         if: env.ans == 'Hello'
