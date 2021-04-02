@@ -7,8 +7,6 @@ jobs:
   test_ga:
     name: Test GA
     runs-on: ubuntu-latest
-    env:
-      PR_NUMBER: ${{ github.event.pull_request.number }}
 
     steps:
       - name: Checkout the repository
@@ -23,6 +21,8 @@ jobs:
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
-          echo "PR number = ${{ github.event.pull_request.number }}"
+          echo $FILES
 
+      - name: Run check
+        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'hi'"
 

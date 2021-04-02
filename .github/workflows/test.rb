@@ -1,5 +1,6 @@
 class TestClass
   def self.run(arg)
-   puts arg
+   puts arg 
+   `exit 1`
   end
 end
