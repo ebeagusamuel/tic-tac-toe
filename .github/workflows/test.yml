@@ -20,7 +20,7 @@ jobs:
       - name: Fetch List of pull request files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
-          FILES=$(curl -s -X GET -G $URL)
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES
           ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$FILES'"
 
