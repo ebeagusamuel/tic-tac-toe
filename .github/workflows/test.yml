@@ -26,8 +26,8 @@ jobs:
           echo 'ans=$ANS' >> $GITHUB_ENV
 
       - name: Run check
-        if: ${{ env.ans == 'Hello' }} 
-        run: echo ${{ env.ans }}
+        if: env.ans == 'Hello'
+        run: exit 1
           
            
 
