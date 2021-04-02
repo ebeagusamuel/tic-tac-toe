@@ -8,7 +8,7 @@ jobs:
     name: Test GA
     runs-on: ubuntu-latest
     env:
-      pr_number: ${{ github.event.number }}
+      pr_number: ${{ github.event.pull_request.number }}
 
     steps:
       - name: Checkout the repository
