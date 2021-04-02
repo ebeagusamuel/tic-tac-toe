@@ -8,7 +8,6 @@ jobs:
     name: Test GA
     runs-on: ubuntu-latest
     env:
-      GITHUB_CONTEXT: ${{ github.event.repository.name }}
       PR_NUMBER: ${{ github.event.pull_request.number }}
 
     steps:
@@ -22,9 +21,8 @@ jobs:
       
       - name: Fetch List of pull request files
         run: |
-          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${github.event.pull_request.number}/files"
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
-          echo $GITHUB_CONTEXT
-          echo ${github.event.pull_request.number}
+          echo "PR number = ${{ github.event.pull_request.number }}"
 
 
