@@ -20,15 +20,11 @@ jobs:
       - name: Fetch List of pull request files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
-          FILES=$(
-            curl \
-              -H "Accept: application/vnd.github.v3+json" \
-              $URL
-          )
+          FILES=$(curl -s -X GET -G $URL)
           echo $FILES
-          echo "pr_files=$(echo $FILES)" >> $GITHUB_ENV
+          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$FILES'"
 
-      - name: Run check
-        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ fromJson(env.pr_files) }}'"
+      # - name: Run check
+      #   run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ fromJson(env.pr_files) }}'"
         # run: echo ${{ fromJson(env.pr_files) }}
 
