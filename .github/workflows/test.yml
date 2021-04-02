@@ -22,13 +22,9 @@ jobs:
       
       - name: Fetch List of pull request files
         run: |
-          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${github.event.pull_request.number}/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
           echo $GITHUB_CONTEXT
-          echo $PR_NUMBER
-          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$pr_number'"
+          echo ${github.event.pull_request.number}
 
-      # - name: Run check
-      #   run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ fromJson(env.pr_files) }}'"
-        # run: echo ${{ fromJson(env.pr_files) }}
 
