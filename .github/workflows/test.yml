@@ -8,8 +8,8 @@ jobs:
     name: Test GA
     runs-on: ubuntu-latest
     env:
-      GITHUB_CONTEXT: ${{ github.event }}
-      pr_number: ${{ github.event.pull_request.number }}
+      GITHUB_CONTEXT: ${{ github.event.repository.name }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
 
     steps:
       - name: Checkout the repository
@@ -25,6 +25,7 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
           echo $GITHUB_CONTEXT
+          echo $PR_NUMBER
           ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$pr_number'"
 
       # - name: Run check
