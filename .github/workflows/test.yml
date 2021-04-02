@@ -27,7 +27,7 @@ jobs:
 
       - name: Run check
         if: ${{ env.ans }} == 'Hello'
-        run: exit 1
+        run: echo ${{ env.ans }}
           
            
 
