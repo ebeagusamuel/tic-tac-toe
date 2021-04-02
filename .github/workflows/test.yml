@@ -24,5 +24,10 @@ jobs:
           echo $FILES
 
       - name: Run check
-        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'hi'"
+        run: |
+          ANS=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'Hello'")
+          echo 'ans=$(echo $ANS)' >> $GITHUB_ENV
+        if: contains(${{ env.ans }}, 'Hel')
+        run: exit 1
+           
 
