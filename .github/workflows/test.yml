@@ -7,6 +7,8 @@ jobs:
   test_ga:
     name: Test GA
     runs-on: ubuntu-latest
+    env:
+      pr_number: ${{ github.event.number }}
 
     steps:
       - name: Checkout the repository
@@ -22,7 +24,7 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
           echo $FILES
-          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ github.event.number }}'"
+          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$pr_number'"
 
       # - name: Run check
       #   run: ruby -r "./.github/workflows/test.rb" -e "TestClass.run '${{ fromJson(env.pr_files) }}'"
