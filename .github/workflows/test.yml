@@ -21,12 +21,12 @@ jobs:
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
           FILES=$(curl -s -X GET -G $URL | jq --raw-output)
-          echo $FILES
           ANS=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'Hello'")
-          echo 'ans=$(echo $ANS)' >> $GITHUB_ENV
+          echo $ANS
+          echo 'ans=$ANS' >> $GITHUB_ENV
 
       - name: Run check
-        if: ${{ env.ans }} == 'Hello'
+        if: ${{ env.ans == 'Hello' }} 
         run: echo ${{ env.ans }}
           
            
