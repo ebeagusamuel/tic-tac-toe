@@ -1,13 +1,11 @@
-# require 'faraday'
-# require 'json'
+require 'faraday'
+require 'json'
 
 class TestClass
-  def self.run(pr_num, a)
-    # url = "https://api.github.com/repos/#{repo}/pulls/#{pr_num}/files"
-    # response = Faraday.get(url, {"Accept" => "application/vnd.github.v3+json"})
-    # p JSON.parse(response.body).class
-    puts pr_num
-    puts a
+  def self.run
+    url = "https://api.github.com/repos/ebeagusamuel/tic-tac-toe/pulls/8/files"
+    response = Faraday.get(url, {"Accept" => "application/vnd.github.v3+json"})
+    p JSON.parse(response.body)
   end
 end
 
