@@ -26,6 +26,8 @@ jobs:
           echo $PR_NUMBER
           echo $REPO
           echo $TOKEN
+          ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$TOKEN'"
+          
 
           
            
