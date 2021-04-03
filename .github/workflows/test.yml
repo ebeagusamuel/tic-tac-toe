@@ -7,6 +7,10 @@ jobs:
   test_ga:
     name: Test GA
     runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      REPO: ${{GITHUB_REPOSITORY}}
+      TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
       - name: Checkout the repository
@@ -19,18 +23,10 @@ jobs:
       
       - name: Fetch List of pull request files
         run: |
-          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/8/files"
-          FILES=$(curl -s -X GET -G $URL | jq --raw-output)
-          ANS=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'Hello'")
-          echo $ANS
-          echo 'files=$(echo $FILES)' >> $GITHUB_ENV
-          echo 'ans=Hello' >> $GITHUB_ENV
+          echo $PR_NUMBER
+          echo $REPO
+          echo $TOKEN
 
-      - name: Run check
-        if: env.ans == 'Hello'
-        run: |
-          echo ${{env.ans}}
-          echo ${{env.files}}
           
            
 
