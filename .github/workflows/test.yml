@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
-      REPO: $GITHUB_REPOSITORY
+      # REPO: $GITHUB_REPOSITORY
       TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
