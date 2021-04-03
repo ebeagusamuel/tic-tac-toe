@@ -1,5 +1,5 @@
-require_relative '../lib/player.rb'
-require_relative '../lib/board.rb'
+require_relative '../lib/player'
+require_relative '../lib/board'
 
 describe Player do
   let(:player_one) { Player.new('sam', 'X') }
@@ -19,5 +19,4 @@ describe Player do
       expect(test_player).to be player_two
     end
   end
-  #modideid
 end

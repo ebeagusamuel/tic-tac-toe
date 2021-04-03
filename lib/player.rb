@@ -16,6 +16,4 @@ class Player
       player_one
     end
   end
-
-  #comment
 end

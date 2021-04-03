@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/player.rb'
-require_relative '../lib/board.rb'
-require_relative '../lib/validators.rb'
+require_relative '../lib/player'
+require_relative '../lib/board'
+require_relative '../lib/validators'
 
 user_symbols = %w[X O]
 counter = 0
