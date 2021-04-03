@@ -9,5 +9,3 @@ class TestClass
     puts arg
   end
 end
-
-# TestClass.run('ebeagusamuel/tic-tac-toe', 8)
