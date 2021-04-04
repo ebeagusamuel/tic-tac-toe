@@ -26,5 +26,3 @@ jobs:
       - name: Fetch List of pull request files
         run: |
           ruby -r "./.github/workflows/test.rb" -e "TestClass.run '$PR_NUMBER, $REPO, $TOKEN'"
-          
-          
