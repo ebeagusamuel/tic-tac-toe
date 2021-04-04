@@ -32,7 +32,8 @@ class RulesMatchingZeroFiles
 
     # return if rules.nil? || rules.none?
 
-    puts 'Hello'
+    puts repo.class
+    puts token.class
     # rules
   end
 
