@@ -27,7 +27,7 @@ class RulesMatchingZeroFiles
     @repo_files = Dir.glob('**/**', File::FNM_DOTMATCH)
   end
 
-  def self.run
+  def run
     rules = rules_matching_zero_files(pr_num, repo, token)
 
     return if rules.nil? || rules.none?
