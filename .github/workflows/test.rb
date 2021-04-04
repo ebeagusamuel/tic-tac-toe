@@ -32,8 +32,8 @@ class RulesMatchingZeroFiles
 
     return if rules.nil? || rules.none?
 
-    rules
     puts 'Hello'
+    rules
   end
 
   private
