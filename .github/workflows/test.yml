@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
+      REPO: ${{ github.event}}
       TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
@@ -19,15 +20,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
+          bundler-cache: true
 
       - name: Fetch List of pull request files
         run: |
           echo $PR_NUMBER
+          echo $REPO
           echo ${GITHUB_REPOSITORY}
           echo $TOKEN
-          ruby -r "./.github/workflows/test.rb" -e "TestClass.run 'Hello'"
           
-
-          
-           
-
