@@ -28,12 +28,12 @@ class RulesMatchingZeroFiles
   end
 
   def run
-    rules = rules_matching_zero_files(pr_num, repo, token)
+    # rules = rules_matching_zero_files(pr_num, repo, token)
 
-    return if rules.nil? || rules.none?
+    # return if rules.nil? || rules.none?
 
     puts 'Hello'
-    rules
+    # rules
   end
 
   private
