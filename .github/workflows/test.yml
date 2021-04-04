@@ -10,6 +10,7 @@ jobs:
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
       TOKEN: ${{secrets.GITHUB_TOKEN}}
+      CONTEXT: ${{ to_json(github) }}
 
     steps:
       - name: Checkout the repository
@@ -30,5 +31,5 @@ jobs:
           echo ${{ github.event }}
           echo ${GITHUB_REPOSITORY}
           echo $TOKEN
-          echo ${{github.event.number}}
+          echo $CONTEXT
           
