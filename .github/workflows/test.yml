@@ -21,8 +21,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
-          bundler-cache: true
-
+      
+      - name: Install needed gems
+          run: |
+            gem install pathspec
+            gem install faraday
+            
       - name: Fetch List of pull request files
         run: |
           v=(foo bar)
