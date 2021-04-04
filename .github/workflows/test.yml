@@ -39,8 +39,8 @@ jobs:
 
       - name: Run check
         run: |
-          a=$(${{steps.get_rules.outputs.ruless}})
-          echo ${a[@]}
+          avv=$(${{steps.get_rules.outputs.ruless}})
+          echo ${avv[@]}
 
 
 
