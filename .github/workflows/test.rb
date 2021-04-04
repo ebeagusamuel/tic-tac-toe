@@ -32,7 +32,7 @@ class RulesMatchingZeroFiles
 
     # return if rules.nil? || rules.none?
 
-    puts 'Hello'
+    'Hello'
     # rules
   end
 
