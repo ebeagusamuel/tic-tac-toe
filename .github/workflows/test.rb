@@ -1,5 +1,5 @@
-# require 'faraday'
-# require 'json'
+require 'faraday'
+require 'json'
 
 class TestClass
   def self.run(pr_num, repo, token)
