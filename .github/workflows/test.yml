@@ -28,15 +28,18 @@ jobs:
           gem install faraday
 
       - name: Fetch List of pull request files
+        id: get_rules
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
           rules=$(ruby -r "./.github/workflows/test.rb" -e "RulesMatchingZeroFiles.new($PR_NUMBER, '$REPO', '$TOKEN').run")
-          rules1=hihihi
+          rules1=(a b c d)
           echo $rules1
           echo '::set-output name=rules::$rules1'
 
       - name: Run check
-        run: echo ${{steps.get_rules.outputs.rules1}}
+        run: |
+          echo ${{steps.get_rules.outputs.rules1}}
+          
 
 
