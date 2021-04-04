@@ -31,3 +31,4 @@ jobs:
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
+          ruby -r "./.github/workflows/test.rb" -e "RulesMatchingZeroFiles.run"
