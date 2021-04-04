@@ -25,7 +25,7 @@ jobs:
         run: |
           pull_number=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
           echo $pull_number
-          echo ${GITHUB_REF}
+          echo ${GITHUB_EVENT_PATH}
           echo $PR_NUMBER
           echo ${{ github.event }}
           echo ${GITHUB_REPOSITORY}
