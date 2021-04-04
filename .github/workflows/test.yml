@@ -23,6 +23,8 @@ jobs:
 
       - name: Fetch List of pull request files
         run: |
+          pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          echo $pull_number
           echo $PR_NUMBER
           echo ${{ github.event }}
           echo ${GITHUB_REPOSITORY}
