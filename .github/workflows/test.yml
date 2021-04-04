@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.pull_request.number }}
-      REPO: ${{ github.event }}
       TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
@@ -25,7 +24,7 @@ jobs:
       - name: Fetch List of pull request files
         run: |
           echo $PR_NUMBER
-          echo $REPO
+          echo ${{ github.event }}
           echo ${GITHUB_REPOSITORY}
           echo $TOKEN
           
