@@ -35,11 +35,11 @@ jobs:
           rules=$(ruby -r "./.github/workflows/test.rb" -e "RulesMatchingZeroFiles.new($PR_NUMBER, '$REPO', '$TOKEN').run")
           rules1=(a b c d)
           echo $rules1
-          echo '::set-output name=rules::$rules1'
+          echo '::set-output name=rules1::$rules1'
 
       - name: Run check
         run: |
           echo ${{steps.get_rules.outputs.rules1}}
-          
+
 
 
