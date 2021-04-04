@@ -32,10 +32,11 @@ jobs:
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
           rules=$(ruby -r "./.github/workflows/test.rb" -e "RulesMatchingZeroFiles.new($PR_NUMBER, '$REPO', '$TOKEN').run")
-          echo $rules
-          echo '::set-output name=rules::$rules'
+          rules1=hihihi
+          echo $rules1
+          echo '::set-output name=rules::$rules1'
 
       - name: Run check
-        run: echo ${{steps.get_rules.outputs.rules}}
+        run: echo ${{steps.get_rules.outputs.rules1}}
 
 
