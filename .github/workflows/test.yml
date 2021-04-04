@@ -30,4 +30,5 @@ jobs:
           echo ${{ github.event }}
           echo ${GITHUB_REPOSITORY}
           echo $TOKEN
+          echo ${{github.event.number}}
           
