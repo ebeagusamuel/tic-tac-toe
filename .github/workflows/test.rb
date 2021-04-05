@@ -7,7 +7,7 @@ class TestClass
     # response = Faraday.get(url, {"Accept" => "application/vnd.github.v3+json"})
     # JSON.parse(response.body)
     # puts arg
-    puts arg.class
+    # puts arg.class
     puts arg
   end
 end
