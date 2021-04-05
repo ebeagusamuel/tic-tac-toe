@@ -87,7 +87,7 @@ class RulesMatchingZeroFiles
       )
     files = JSON.parse(response.body)
 
-    files.select{|file| file[:status] == status}.map{|file| file[:filename]}
+    files.select{|file| file['status'] == status}.map{|file| file['filename']}
   end
 end
 

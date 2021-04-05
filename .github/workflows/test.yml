@@ -27,6 +27,10 @@ jobs:
           gem install pathspec
           gem install faraday
 
+      - name: Extra test
+        if: ['hello', 'hi'] == Array
+        run: echo hiiiiii
+
       - name: Fetch List of pull request files
         id: get_rules
         run: |
