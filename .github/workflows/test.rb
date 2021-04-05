@@ -17,7 +17,7 @@ class TestClass
     if rules.nil? || rules.none?
       puts 0
     else
-      puts 1
+      puts rules
     end
   end
 
