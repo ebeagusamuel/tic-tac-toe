@@ -32,7 +32,7 @@ jobs:
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
-          rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run("$REPO")")
+          rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run('$REPO')")
           ruless=(a b c d)
           echo ${ruless[@]}
           echo "::set-output name=rules::$rules"
