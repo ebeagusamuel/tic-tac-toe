@@ -33,11 +33,13 @@ jobs:
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
           rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.new($PR_NUMBER, '$REPO', '$TOKEN').run")
-          echo ${rules[@]}
-          echo "::set-output name=rules::${rules[@]}"
+          echo ${rules}
+          echo "::set-output name=rules::$rules"
 
       - name: Run check
+        if: steps.get_rules.outputs.rules == 1
         run: |
+          echo 'I was called'
           avv=${{steps.get_rules.outputs.rules}}
           declare -p $aav | grep -q '^declare \-a' && echo array || echo no array
 
