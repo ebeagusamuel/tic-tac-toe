@@ -8,7 +8,7 @@ class TestClass
     # JSON.parse(response.body)
     # puts arg
     # puts arg.class
-    return arg
+    arg
   end
 end
 
