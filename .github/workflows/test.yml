@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.number }}
-      REPO: ${{ github.repository}}
+      REPO: "${{ github.repository}}"
       TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
@@ -32,7 +32,7 @@ jobs:
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
-          rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run('$REPO')")
+          rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run($REPO)")
           ruless=(a b c d)
           echo ${ruless[@]}
           echo "::set-output name=rules::$rules"
@@ -40,7 +40,7 @@ jobs:
       - name: Run check
         run: |
           avv=${{steps.get_rules.outputs.rules}}
-          declare -p aav | grep -q '^declare \-a' && echo array || echo no array
+          declare -p $aav | grep -q '^declare \-a' && echo array || echo no array
 
 
 
