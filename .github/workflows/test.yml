@@ -29,7 +29,6 @@ jobs:
 
       - name: Fetch List of pull request files
         id: get_rules
-        if: ${{ ['hello', 'hi'] == Array }}
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
@@ -39,6 +38,7 @@ jobs:
           echo "::set-output name=ruless::$ruless"
 
       - name: Run check
+        if: ${{ ['hello', 'hi'] == Array }}
         run: |
           avv=$(${{steps.get_rules.outputs.ruless}})
           echo ${avv[@]}
