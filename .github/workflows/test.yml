@@ -32,16 +32,16 @@ jobs:
         run: |
           v=(foo bar)
           declare -p v | grep -q '^declare \-a' && echo array || echo no array
-          rules=$(ruby -r "./.github/workflows/test.rb" -e "RulesMatchingZeroFiles.new($PR_NUMBER, '$REPO', '$TOKEN').run")
+          rules=$(ruby -r "./.github/workflows/test.rb" -e "TestClass.run("$REPO")")
           ruless=(a b c d)
           echo ${ruless[@]}
-          echo "::set-output name=ruless::$ruless"
+          echo "::set-output name=rules::$rules"
 
       - name: Run check
-        if: ${{ ['hello', 'hi'] == Array }}
         run: |
-          avv=$(${{steps.get_rules.outputs.ruless}})
-          echo ${avv[@]}
+          avv=${{steps.get_rules.outputs.rules}}
+          declare -p aav | grep -q '^declare \-a' && echo array || echo no array
+
 
 
 
