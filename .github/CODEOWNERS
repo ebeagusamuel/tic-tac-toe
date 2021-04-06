@@ -8,3 +8,4 @@
 /api/lib/graphql_api/talent/types/payments_monthly_summary_type.rb                         @repo/team
 /api/lib/graphql_api/talent/types/interview_talent_note_input_type.rb                      @repo/team
 /api/lib/graphql_api/talent/types/interview_talent_note_type.rb                            @repo/team
+/path/to/new/file                                                                          @repo/team
