@@ -10,7 +10,7 @@ class TestClass
       puts 'Rules array is empty'
       return
     end
-    
+
     puts 'You have some rules in codeowners not matching any file in platform'; exit 1
   end
 
@@ -20,6 +20,10 @@ class TestClass
     modified = modified_files
     removed = removed_files
 
+    puts "Modified: #{modified}"
+    puts "Removed: #{removed}"
+    puts "Codeowners_line: #{lines_added_to_codeowners}"
+    
     if modified.split("\n").include?('.github/CODEOWNERS') && removed.split("\n").none?
       parsed_codeowners = parse_codeowners(lines_added_to_codeowners)
 
