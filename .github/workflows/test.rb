@@ -56,7 +56,7 @@ class TestClass
   end
 
   def lines_added_to_codeowners
-    diff = `/usr/bin/git diff #{preceeding_commit} #{most_recent_commit} -- .github/CODEOWNERS`
+    diff = `/usr/bin/git diff #{preceeding_commit} #{most_recent_commit} -- ./.github/CODEOWNERS`
 
     diff.split("\n").select{|line| line[0] == '+' && line[1] != '+'}.map{|line| line[1..-1]}
   end
