@@ -2,7 +2,7 @@ require 'pathspec'
 require 'faraday'
 require 'json'
 
-class RulesMatchingZeroFiles
+class TestClass
   attr_reader :pr_num, :repo, :token, :repo_files
 
   def initialize(pr_num, repo, token)
