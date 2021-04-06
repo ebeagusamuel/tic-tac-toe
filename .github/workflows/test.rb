@@ -6,7 +6,10 @@ class TestClass
   def run
     rules = rules_matching_zero_files
 
-    return if rules.none?
+    if rules.none?
+      puts 'Rules array is empty'
+      return
+    end
     
     puts 'You have some rules in codeowners not matching any file in platform'; exit 1
   end
