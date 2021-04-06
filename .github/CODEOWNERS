@@ -8,4 +8,5 @@
 /api/lib/graphql_api/talent/types/interview_talent_note_input_type.rb                      @repo/team
 /api/lib/graphql_api/talent/types/interview_talent_note_type.rb                            @repo/team
 /it/does/not/match/file.rb                                                                 @repo/team
-/it/does/not/match/file2.rb                                                                 @repo/team
+/it/does/not/match/file2.rb                                                                @repo/team
+/it/does/not/match/file3.rb                                                                @repo/team
