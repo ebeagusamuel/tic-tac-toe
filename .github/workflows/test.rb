@@ -78,7 +78,7 @@
 first = `git log -n 1 --pretty=format:"%H" | tail -1`
 second = `git log -n 2 --pretty=format:"%H" | tail -1`
 q = `git diff --name-only --diff-filter=AM #{first} #{second}`
-w = `git diff #{first} #{second} -- .github/CODEOWNERS`
+w = `git diff #{second} #{first} -- .github/CODEOWNERS`
 puts w.split("\n").each_with_object([]){|c, v| v << c.strip}.select{|c| c[0] == '-' && c[1] != '-'}
 puts w
 
