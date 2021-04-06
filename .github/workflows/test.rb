@@ -1,85 +1,76 @@
-# require 'pathspec'
-# require 'faraday'
-# require 'json'
+require 'pathspec'
 
-# class TestClass
-#   attr_reader :pr_num, :repo, :token, :repo_files
+class TestClass
+  REPO_FILES = Dir.glob('**/**', File::FNM_DOTMATCH)
 
-#   def initialize(pr_num, repo, token)
-#     @pr_num = pr_num
-#     @repo = repo
-#     @token = token
-#     @repo_files = Dir.glob('**/**', File::FNM_DOTMATCH)
-#   end
+  def run
+    rules = rules_matching_zero_files
 
-#   def run
-#     rules = rules_matching_zero_files(pr_num, repo, token)
-
-#     return if rules.nil? || rules.none?
+    return if rules.none?
     
-#     puts 'Hello'; exit 1
-#   end
+    puts 'You have some rules in codeowners not matching any file in platform'; exit 1
+  end
 
-#   private
+  private
 
-#   def rules_matching_zero_files(pr_num, repo, token)
-#     modified = retrieve_pr_files(pr_num, repo, token, 'added')
-#     removed = retrieve_pr_files(pr_num, repo, token, 'removed')
-#     parsed_codeowners = parse_codeowners
+  def rules_matching_zero_files
+    modified = modified_files
+    removed = removed_files
 
-#     if modified.include?('.github/CODEOWNERS')
-#       parsed_codeowners.keys.each_with_object([]) do |rule, result|
-#         result << rule unless repo_files.any?{|file| match?(rule, file)}
-#       end
-#     elsif removed.any?
-#       rules_matching_removed_files = parsed_codeowners.keys.each_with_object([]) do |rule, result|
-#         result << rule if removed.any?{|file| match?(rule, file)}
-#       end
+    if modified.split("\n").include?('.github/CODEOWNERS') && removed.split("\n").none?
+      parsed_codeowners = parse_codeowners(lines_added_to_codeowners)
 
-#       rules_matching_removed_files.each_with_object([]) do |rule, result|
-#         result << rule unless repo_files.any?{|file| match?(rule, file)}
-#       end
-#     end
-#   end
+      parsed_codeowners.keys.each_with_object([]) do |rule, result|
+        result << rule unless REPO_FILES.any?{|file| match?(rule, file)}
+      end
+    elsif removed.split("\n").any?
+      codeowners = File.read('.github/CODEOWNERS').split("\n")
+      parsed_codeowners = parse_codeowners(codeowners)
 
-#   def parse_codeowners
-#     h = {}
-#     codeowners = File.read('.github/CODEOWNERS')
-#     codeowners.split("\n").each do |line|
-#       next if line[0] == '#'
-#       parts = line.gsub(/\s+/, ' ').strip.split(' ')
-#       pattern = parts[0]
-#       teams = parts.drop(1).to_a
-#       h[pattern] = teams if pattern
-#     end
-#     h
-#   end
+      rules_matching_removed_files = parsed_codeowners.keys.each_with_object([]) do |rule, result|
+        result << rule if removed.split("\n").any?{|file| match?(rule, file)}
+      end
 
-#   def match?(pattern, dir)
-#     pathspec_pattern = PathSpec.new(pattern)
-#     pathspec_pattern.match(dir)
-#   end
+      rules_matching_removed_files.each_with_object([]) do |rule, result|
+        result << rule unless REPO_FILES.any?{|file| match?(rule, file)}
+      end
+    else
+      []
+    end
+  end
 
-#   def retrieve_pr_files(pr_num, repo, token, status)
-#     url = "https://api.github.com/repos/#{repo}/pulls/#{pr_num}/files"
-#     response = Faraday.new(
-#       url,
-#       headers: { 
-#       "Accept" => "application/vnd.github.v3+json",
-#       "Authorization" => "token #{token}"
-#       }
-#     ).get        
-#     files = JSON.parse(response.body)
-    
-#     files.select{|file| file['status'] == status}.map{|file| file['filename']}
-#   end
-# end
+  def most_recent_commit
+    `git log -n 1 --pretty=format:"%H" | tail -1`
+  end
 
-first = `git log -n 1 --pretty=format:"%H" | tail -1`
-second = `git log -n 2 --pretty=format:"%H" | tail -1`
-q = `git diff --name-only --diff-filter=AM #{first} #{second}`
-w = `git diff #{second} #{first} -- .github/CODEOWNERS`
-puts w.split("\n").each_with_object([]){|c, v| v << c.strip}.select{|c| c[0] == '-' && c[1] != '-'}
-puts w
+  def preceeding_commit
+    `git log -n 2 --pretty=format:"%H" | tail -1`
+  end
 
-# puts q
+  def modified_files
+    `git diff --name-only --diff-filter=M #{most_recent_commit} #{preceeding_commit}`
+  end
+
+  def removed_files
+    `git diff --name-only --diff-filter=D #{most_recent_commit} #{preceeding_commit}`
+  end
+
+  def lines_added_to_codeowners
+    diff = `git diff #{preceeding_commit} #{most_recent_commit} -- .github/CODEOWNERS`
+
+    diff.split("\n").select{|line| line[0] == '+' && line[1] != '+'}.map{|line| line[1..-1]}
+  end
+
+  def parse_codeowners(codeowners)
+    codeowners.each_with_object({}) do |line, h|
+      next if line[0] == '#' || line.empty?
+      pattern, *teams = line.gsub(/\s+/, ' ').strip.split(' ')
+      h[pattern] = teams
+    end
+  end
+
+  def match?(pattern, dir)
+    pathspec_pattern = PathSpec.new(pattern)
+    pathspec_pattern.match(dir)
+  end
+end

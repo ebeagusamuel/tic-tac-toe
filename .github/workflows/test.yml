@@ -8,10 +8,6 @@ jobs:
   test_ga:
     name: Test GA
     runs-on: ubuntu-latest
-    env:
-      PR_NUMBER: ${{ github.event.number }}
-      REPO: ${{ github.repository}}
-      TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     steps:
       - name: Checkout the repository
@@ -25,11 +21,10 @@ jobs:
       - name: Install needed gems
         run: |
           gem install pathspec
-          gem install faraday
 
       - name: Fetch List of pull request files
         id: get_rules
-        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.new($PR_NUMBER, '$REPO', '$TOKEN').run"
+        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.new.run"
           
 
 

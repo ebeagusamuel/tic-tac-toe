@@ -1,4 +1,3 @@
-/api/lib/graphql_api/talent/domain/job_search/aggregation_result.rb                        @repo/team
 /api/lib/graphql_api/talent/entities/payments_monthly_summary.rb                           @repo/team
 /api/lib/graphql_api/talent/entities/interview_talent_note.rb                              @repo/team
 /api/lib/graphql_api/talent/entities/survey/interview_ended.rb                             @repo/team
@@ -8,6 +7,4 @@
 /api/lib/graphql_api/talent/types/payments_monthly_summary_type.rb                         @repo/team
 /api/lib/graphql_api/talent/types/interview_talent_note_input_type.rb                      @repo/team
 /api/lib/graphql_api/talent/types/interview_talent_note_type.rb                            @repo/team
-/path/to/new/file                                                                          @repo/team
-/path/to/another/file                                                                      @repo/team
-/path/to/another/file/slim.rb                                                              @repo/team
+/it/does/not/match/file.rb                                                                 @repo/team
