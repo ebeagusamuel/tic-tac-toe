@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/checkout@v2
+      
+      - name: Prepare repository
+         run: git checkout "${GITHUB_REF:11}"
 
       - name: Setup Ruby  
         uses: ruby/setup-ruby@v1
