@@ -24,8 +24,8 @@ jobs:
 
       - name: Test git command
         run: |
-          a=$(git log -n 1 --pretty=format:"%H" | tail -1)
-          b=$(git log -n 2 --pretty=format:"%H" | tail -1)
+          a=$(git log -n 2 --pretty=format:"%H" | tail -1)
+          b=$(git log -n 3 --pretty=format:"%H" | tail -1)
           c=$(git diff --name-only --diff-filter=M $a $b)
           d=$(git diff --name-only --diff-filter=D $a $b)
           e=$(git diff $b $a -- .github/CODEOWNERS)
