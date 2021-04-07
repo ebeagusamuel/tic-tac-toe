@@ -27,7 +27,7 @@ jobs:
           a=$(git log -n 2 --pretty=format:"%H" | tail -1)
           b=$(git log -n 3 --pretty=format:"%H" | tail -1)
           c=$(git diff --name-only --diff-filter=M $a HEAD~1)
-          d=$(git diff --name-only --diff-filter=D $a HEAD~1)
+          d=$(git diff --name-only --diff-filter=A $a HEAD~1)
           e=$(git diff HEAD~1 $a -- .github/CODEOWNERS)
           echo $a
           echo $b
