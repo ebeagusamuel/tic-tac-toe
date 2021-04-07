@@ -20,10 +20,6 @@ class TestClass
     modified = modified_files
     removed = removed_files
 
-    puts "Modified: #{modified}"
-    puts "Removed: #{removed}"
-    puts "Codeowners_line: #{lines_added_to_codeowners}"
-    
     if modified.split("\n").include?('.github/CODEOWNERS') && removed.split("\n").none?
       parsed_codeowners = parse_codeowners(lines_added_to_codeowners)
 
@@ -47,23 +43,23 @@ class TestClass
   end
 
   def most_recent_commit
-    `/usr/bin/git log -n 1 --pretty=format:"%H" | tail -1`
+    `git log -n 1 --pretty=format:"%H" | tail -1`
   end
 
   def preceeding_commit
-    `/usr/bin/git log -n 2 --pretty=format:"%H" | tail -1`
+    `git log -n 2 --pretty=format:"%H" | tail -1`
   end
 
   def modified_files
-    `/usr/bin/git diff --name-only --diff-filter=M #{most_recent_commit} #{preceeding_commit}`
+    `git diff --name-only --diff-filter=M #{most_recent_commit} #{preceeding_commit}`
   end
 
   def removed_files
-    `/usr/bin/git diff --name-only --diff-filter=D #{most_recent_commit} #{preceeding_commit}`
+    `git diff --name-only --diff-filter=D #{most_recent_commit} #{preceeding_commit}`
   end
 
   def lines_added_to_codeowners
-    diff = `/usr/bin/git diff #{preceeding_commit} #{most_recent_commit} -- ./.github/CODEOWNERS`
+    diff = `git diff #{preceeding_commit} #{most_recent_commit} -- .github/CODEOWNERS`
 
     diff.split("\n").select{|line| line[0] == '+' && line[1] != '+'}.map{|line| line[1..-1]}
   end

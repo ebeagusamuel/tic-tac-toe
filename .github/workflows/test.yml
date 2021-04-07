@@ -19,8 +19,20 @@ jobs:
           ruby-version: 2.6
       
       - name: Install needed gems
+        run: gem install pathspec
+
+      - name: Test git command
         run: |
-          gem install pathspec
+          a=$(git log -n 1 --pretty=format:"%H" | tail -1)
+          b=$(git log -n 2 --pretty=format:"%H" | tail -1)
+          c=$(git diff --name-only --diff-filter=M $a $b)
+          d=$(git diff --name-only --diff-filter=D $a $b)
+          e=$(git diff $b $a -- .github/CODEOWNERS)
+          echo $a
+          echo $b
+          echo $c
+          echo $d
+          echo $e
 
       - name: Fetch List of pull request files
         id: get_rules
