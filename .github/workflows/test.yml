@@ -11,9 +11,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Reattach HEAD
-        run: git checkout "$(echo ${{ github.ref }} | sed -E 's|refs/[a-zA-Z]+/||')"
+        with:
+          fetch-depth: 0
 
       - name: Setup Ruby  
         uses: ruby/setup-ruby@v1
