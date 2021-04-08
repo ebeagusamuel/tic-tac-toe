@@ -12,7 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${GITHUB_REF##*/}
           fetch-depth: 0
 
       - name: Setup Ruby  
@@ -35,7 +34,7 @@ jobs:
           echo $c
           echo $d
           echo $e
-          echo ${GITHUB_REF##*/}
+          echo ${GITHUB_HEAD_REF} | tr / -)
 
       - name: Fetch List of pull request files
         id: get_rules
