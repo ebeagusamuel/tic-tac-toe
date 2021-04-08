@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          ref: ${GITHUB_HEAD_REF}
           fetch-depth: 0
 
       - name: Setup Ruby  
