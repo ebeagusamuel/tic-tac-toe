@@ -15,6 +15,3 @@ def retrieve_pr_files(pr_num, repo, token, status)
   
   files.select{|file| file['status'] == status}.map{|file| file['filename']}
 end
-
-a = retrieve_pr_files(9, 'ebeagusamuel/tic-tac-toe', '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', 'modified')
-puts a
