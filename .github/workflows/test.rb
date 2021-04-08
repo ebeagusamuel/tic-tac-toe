@@ -74,4 +74,30 @@ class TestClass
   end
 end
 
+def most_recent_commit
+  `git log -n 1 --pretty=format:"%H" | tail -1`
+end
+
+def preceeding_commit
+  `git log -n 2 --pretty=format:"%H" | tail -1`
+end
+
+def modified_files
+  `git diff --name-only --diff-filter=M #{most_recent_commit} HEAD~1`
+end
+
+def removed_files
+  `git diff --name-only --diff-filter=D #{most_recent_commit} HEAD~1`
+end
+
+def lines_added_to_codeowners
+  diff = `git diff HEAD~1 #{most_recent_commit} -- .github/CODEOWNERS`
+
+  diff.split("\n").select{|line| line[0] == '+' && line[1] != '+'}.map{|line| line[1..-1]}
+end
+
+puts `git diff HEAD~1 #{most_recent_commit} -- .github/CODEOWNERS`
+puts modified_files
+puts removed_files
+puts most_recent_commit
 
