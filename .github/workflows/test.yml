@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Get Branch Name
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
+
+      - name: Checkout repository  
+        uses: actions/checkout@v2
         with:
-          ref: $GITHUB_HEAD_REF
           fetch-depth: 0
 
       - name: Setup Ruby  
@@ -35,7 +38,7 @@ jobs:
           echo $c
           echo $d
           echo $e
-          echo ${GITHUB_HEAD_REF}
+          echo ${{ env.BRANCH_NAME }}
 
       - name: Fetch List of pull request files
         id: get_rules
