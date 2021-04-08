@@ -97,7 +97,7 @@ def lines_added_to_codeowners
 end
 
 puts `git diff HEAD~1 #{most_recent_commit} -- .github/CODEOWNERS`
-puts modified_files
+pp modified_files
 puts removed_files
 puts most_recent_commit
 
