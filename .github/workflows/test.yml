@@ -34,7 +34,7 @@ jobs:
           echo $c
           echo $d
           echo $e
-          echo ${GITHUB_HEAD_REF} | tr / -)
+          echo $(${GITHUB_HEAD_REF} | tr / -)
 
       - name: Fetch List of pull request files
         id: get_rules
