@@ -29,7 +29,7 @@ jobs:
 
       - name: Test git command
         run: |
-          a=$(git log -n 2 --pretty=format:"%H" | tail -1)
+          a=$(git log -n 1 --pretty=format:"%H" | tail -1)
           b=$(git log -n 3 --pretty=format:"%H" | tail -1)
           c=$(git diff --name-only --diff-filter=M $a HEAD~1)
           d=$(git diff --name-only --diff-filter=D $a HEAD~1)
