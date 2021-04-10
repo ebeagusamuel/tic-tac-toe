@@ -1,0 +1,12 @@
+/api/lib/graphql_api/talent/entities/payments_monthly_summary.rb                           @repo/team
+/api/lib/graphql_api/talent/entities/interview_talent_note.rb                              @repo/team
+/api/lib/graphql_api/talent/entities/survey/interview_ended.rb                             @repo/team
+/api/lib/graphql_api/talent/entities/survey/interview_ended_question.rb                    @repo/team
+/api/lib/graphql_api/talent/loaders/specialization_job_count_loader.rb                     @repo/team
+/api/lib/graphql_api/talent/mutations/interview/change_talent_notes_mutation.rb            @repo/team
+/api/lib/graphql_api/talent/types/payments_monthly_summary_type.rb                         @repo/team
+/api/lib/graphql_api/talent/types/interview_talent_note_input_type.rb                      @repo/team
+/api/lib/graphql_api/talent/types/interview_talent_note_type.rb                            @repo/team
+modified/the/file                                                                          @repo/team
+modified/the/file/agin                                                                     @repo/team
+#modified

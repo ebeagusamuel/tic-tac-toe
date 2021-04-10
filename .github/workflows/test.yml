@@ -1,0 +1,37 @@
+name: Testing Github Actions
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test_ga:
+    name: Test GA
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get Branch Name
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF})" >> $GITHUB_ENV
+
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ env.BRANCH_NAME }}
+          fetch-depth: 0
+
+      - name: Setup Ruby  
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+      
+      - name: Install needed gems
+        run: gem install pathspec
+
+      - name: Fetch List of pull request files
+        id: get_rules
+        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.get_info.run"
+          
+
+
+
+
