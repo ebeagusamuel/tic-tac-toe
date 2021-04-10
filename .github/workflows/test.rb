@@ -3,6 +3,7 @@ require 'pathspec'
 class TestClass
   class << self
     def get_info
+      `git fetch origin master:master`
       new(
         repo_files,
         modified_files,
