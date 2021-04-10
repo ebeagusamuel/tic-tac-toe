@@ -27,23 +27,9 @@ jobs:
       - name: Install needed gems
         run: gem install pathspec
 
-      - name: Test git command
-        run: |
-          a=$(git log -n 1 --pretty=format:"%H" | tail -1)
-          b=$(git log -n 3 --pretty=format:"%H" | tail -1)
-          c=$(git diff --name-only --diff-filter=M $a HEAD~1)
-          d=$(git diff --name-only --diff-filter=D $a HEAD~1)
-          e=$(git diff HEAD~1 $a -- .github/CODEOWNERS)
-          echo $a
-          echo $b
-          echo $c
-          echo $d
-          echo $e
-          echo ${{ env.BRANCH_NAME }}
-
       - name: Fetch List of pull request files
         id: get_rules
-        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.new.run"
+        run: ruby -r "./.github/workflows/test.rb" -e "TestClass.get_info.run"
           
 
 
